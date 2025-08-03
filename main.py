@@ -1,4 +1,4 @@
-import pandas as pd 
+import pandas as pd
 import numpy as np
 
 def mesureThermicite(fichier):
@@ -13,32 +13,34 @@ def mesureThermicite(fichier):
         print(f"Erreur lors de la lecture du fichier : {e}")
         return None
 
-    df.columns = ["nombre d'onde", "transmission"] # attention la transmission est en %
+    df.columns = ["nombre d'onde", "transmission"]
 
-    # Conversion des valeurs en float
-    df["transmission"] = df["transmission"].astype(str).str.replace(",", ".")
-    df["transmission"] = df["transmission"].astype(float)
-    df["nombre d'onde"] = df["nombre d'onde"].astype(str).str.replace(",", ".")
-    df["nombre d'onde"] = df["nombre d'onde"].astype(float)
+    # Conversion sécurisée des valeurs
+    for col in ["transmission", "nombre d'onde"]:
+        df[col] = df[col].astype(str).str.replace(",", ".")
+        try:
+            df[col] = df[col].astype(float)
+        except Exception as e:
+            print(f"Erreur de conversion dans la colonne '{col}': {e}")
+            return None
 
-    # Filtrage de la plage d'intérêt
-    df_filtre = df[(df["nombre d'onde"]>= 770) & (df["nombre d'onde"]<= 1430)]
+    df_filtre = df[(df["nombre d'onde"] >= 770) & (df["nombre d'onde"] <= 1430)]
 
     if df_filtre.empty:
         print("Aucune donnée dans la plage spécifiée.")
         return None
 
     x = df_filtre["nombre d'onde"]
-    y = df_filtre["transmission"] 
+    y = df_filtre["transmission"]
 
-    aireSousLaCourbe = - np.trapz(y, x)
+    aireSousLaCourbe = -np.trapz(y, x)
     aireTotale = 100 * (1430 - 770)
     aireDessusLaCourbe = aireTotale - aireSousLaCourbe
 
     print(f"Aire au-dessus de la courbe : {aireDessusLaCourbe:.2f}")
     print(f"Ratio aire/aire totale : {aireDessusLaCourbe/aireTotale:.4f}")
 
-    return aireDessusLaCourbe, aireDessusLaCourbe/aireTotale
+    return aireDessusLaCourbe, aireDessusLaCourbe / aireTotale
 
 mesureThermicite("fichierSpectrometre.csv")
 
