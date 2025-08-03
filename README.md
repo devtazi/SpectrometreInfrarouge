@@ -29,10 +29,23 @@ python main.py
 - pandas
 - numpy
 
-Installez-les avec :
+## Installation des dépendances
+
+Vous pouvez installer les dépendances avec :
 
 ```bash
-pip install pandas numpy
+pip install -r requirements.txt
+```
+
+### (Optionnel) Créer un environnement virtuel Python
+
+Pour isoler votre projet, il est recommandé d’utiliser un environnement virtuel :
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Sur Linux/Mac
+venv\Scripts\activate     # Sur Windows
+pip install -r requirements.txt
 ```
 
 ## Exemple de fichier CSV
