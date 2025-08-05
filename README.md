@@ -1,5 +1,6 @@
 # Spectromètre Infrarouge
 
+Il s'agit de mon premier mini-projet, destiné à un ami travaillant en laboratoire, afin d'apprendre l'environnement de travail du développeur (usage de git, github etc...)
 Ce projet permet de calculer la thermicité à partir d’un fichier CSV contenant des mesures spectrométriques.
 
 ## Fonction principale
@@ -11,10 +12,9 @@ Le script Python lit un fichier CSV contenant deux colonnes :
 La fonction `mesureThermicite` :
 1. Lit le fichier CSV.
 2. Convertit les données en format numérique.
-3. Filtre les valeurs de `nombre d'onde` entre 770 et 1430.
-4. Calcule l’aire sous la courbe de transmission.
-5. Calcule l’aire au-dessus de la courbe et le ratio par rapport à l’aire totale.
-6. Affiche les résultats.
+3. Filtre les valeurs de `nombre d'onde` entre 770 et 1430 (valeur demandée par le laboratoire)
+4. Calcule l’aire au-dessus de la courbe et le ratio par rapport à l’aire totale.
+5. Affiche les résultats.
 
 ## Utilisation
 
@@ -34,17 +34,6 @@ python main.py
 Vous pouvez installer les dépendances avec :
 
 ```bash
-pip install -r requirements.txt
-```
-
-### (Optionnel) Créer un environnement virtuel Python
-
-Pour isoler votre projet, il est recommandé d’utiliser un environnement virtuel :
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Sur Linux/Mac
-venv\Scripts\activate     # Sur Windows
 pip install -r requirements.txt
 ```
 
