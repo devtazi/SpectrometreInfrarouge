@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 def mesureThermicite(fichier):
+    
     """
     Calcule la thermicité à partir d'un fichier CSV contenant les colonnes
     'nombre d'onde' et 'transmission' (en %).
@@ -15,7 +16,7 @@ def mesureThermicite(fichier):
 
     df.columns = ["nombre d'onde", "transmission"]
 
-    # Conversion sécurisée des valeurs
+    # Conversion des valeurs
     for col in ["transmission", "nombre d'onde"]:
         df[col] = df[col].astype(str).str.replace(",", ".")
         try:
